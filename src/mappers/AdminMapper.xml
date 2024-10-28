@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.school.system.dao.AdminMapper">
+    <resultMap id="adminMap" type="com.school.system.domain.Admin">
+        <result column="id" property="id"/>
+        <result column="admin_num" property="adminNum"/>
+        <result column="admin_name" property="adminName"/>
+        <result column="admin_password" property="adminPassword"/>
+    </resultMap>
+    <sql id="base_column">
+        id, admin_num, admin_name, admin_password
+    </sql>
+    <select id="selectAdminByAdminNum" resultMap="adminMap">
+        select <include refid="base_column"/> from admin where admin_num=#{adminNum};
+    </select>
+    <update id="updateAdmin" parameterType="com.school.system.domain.Admin">
+        update admin set admin_num=#{adminNum}, admin_name=#{adminName}, admin_password=#{adminPassword} where id=#{id}
+    </update>
+</mapper>
